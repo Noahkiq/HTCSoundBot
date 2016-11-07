@@ -33,7 +33,7 @@ class Program
 
         _client.MessageReceived += async (s, e) =>
         {
-            if((e.Message.RawText.Contains("<:awseriously:245270309081448449>")) && (e.Channel.Id == 222494171506671616) && (ohseriouslyEnabled))
+            if((e.Message.RawText.Contains(":awseriously:")) && (e.Channel.Id == 222494171506671616) && (ohseriouslyEnabled))
             {
                 ohseriouslyEnabled = false;
                 System.Timers.Timer ohseriouslyTimer = new System.Timers.Timer();
@@ -86,5 +86,7 @@ class Program
     private static void ohseriously(object source, ElapsedEventArgs e)
     {
         ohseriouslyEnabled = true;
+        System.Timers.Timer ohseriouslyTimer = new System.Timers.Timer();
+        ohseriouslyTimer.Enabled = false;
     }
 }
