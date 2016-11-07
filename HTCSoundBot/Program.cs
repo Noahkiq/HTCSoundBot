@@ -68,8 +68,9 @@ class Program
                 await _vClient.Disconnect();                      // Disconnects from the voice channel.
                 await _client.Disconnect();                       // Disconnect bot from Discord.
                 System.Threading.Thread.Sleep(3600000);           // Wait an hour
+                string token2 = File.ReadAllText("token.txt");     // Grab token file
                 _client.ExecuteAndWait(async () => {
-                    await _client.Connect(token, TokenType.Bot);  // Connect to Discord
+                    await _client.Connect(token2, TokenType.Bot);  // Connect to Discord
                     _client.SetGame("OH SERIOUSLY?");             // Set status
                 });
             }
