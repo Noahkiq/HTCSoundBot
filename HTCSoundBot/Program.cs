@@ -33,8 +33,14 @@ class Program
 
         _client.MessageReceived += async (s, e) =>
         {
-            if((e.Message.RawText.Contains(":awseriously:")) && (e.Channel.Id == 222494171506671616))
+            if ((e.Message.RawText.Contains(":awseriously:")) && (e.Channel.Id == 222494171506671616) && (ohseriouslyEnabled))
             {
+                ohseriouslyEnabled = false;
+                System.Timers.Timer ohseriouslyTimer = new System.Timers.Timer();
+                ohseriouslyTimer.Elapsed += new ElapsedEventHandler(ohseriously);
+                ohseriouslyTimer.Interval = 600000;
+                ohseriouslyTimer.Enabled = true;
+
                 var voiceChannel = _client.FindServers("HTwins Central").FirstOrDefault().FindChannels("[Memes] Sea of Davids").FirstOrDefault();
 
                 var _vClient = await _client.GetService<AudioService>() // We use GetService to find the AudioService that we installed earlier. In previous versions, this was equivelent to _client.Audio()
@@ -64,19 +70,9 @@ class Program
                     }
                 }
 
-                _vClient.Wait();                                  // Waits for the currently playing sound file to end.
-                await _vClient.Disconnect();                      // Disconnects from the voice channel.
-                await _client.Disconnect();                       // Disconnect bot from Discord.
-                System.Threading.Thread.Sleep(3600000);           // Wait an hour
-                string token2 = File.ReadAllText("token.txt");    // Grab token file
-                _client.ExecuteAndWait(async () => {
-                    await _client.Connect(token2, TokenType.Bot); // Connect to Discord
-                    _client.SetGame("OH SERIOUSLY?");             // Set status
-                });
-                while (true)
-                {
-                    //keep the program running until terminated
-                }
+                _vClient.Wait(); // Waits for the currently playing sound file to end.
+
+                await _vClient.Disconnect(); // Disconnects from the voice channel.
             }
         };
 
@@ -86,5 +82,11 @@ class Program
             _client.SetGame("OH SERIOUSLY?");
         });
 
+    }
+    private static void ohseriously(object source, ElapsedEventArgs e)
+    {
+        ohseriouslyEnabled = true;
+        System.Timers.Timer ohseriouslyTimer = new System.Timers.Timer();
+        ohseriouslyTimer.Enabled = false;
     }
 }
