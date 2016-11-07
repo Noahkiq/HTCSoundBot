@@ -79,6 +79,7 @@ class Program
         string token = File.ReadAllText("token.txt");
         _client.ExecuteAndWait(async () => {
             await _client.Connect(token, TokenType.Bot);
+            _client.SetGame("OH SERIOUSLY?");
         });
 
     }
