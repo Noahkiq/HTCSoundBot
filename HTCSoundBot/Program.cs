@@ -38,7 +38,7 @@ class Program
                 ohseriouslyEnabled = false;
                 System.Timers.Timer ohseriouslyTimer = new System.Timers.Timer();
                 ohseriouslyTimer.Elapsed += new ElapsedEventHandler(ohseriously);
-                ohseriouslyTimer.Interval = 600000;
+                ohseriouslyTimer.Interval = 6000000;
                 ohseriouslyTimer.Enabled = true;
 
                 var voiceChannel = _client.FindServers("HTwins Central").FirstOrDefault().FindChannels("[Memes] Sea of Davids").FirstOrDefault();
