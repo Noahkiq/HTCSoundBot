@@ -69,7 +69,7 @@ class Program
                 await _vClient.Disconnect(); // Disconnects from the voice channel.
 
                 ohseriouslyEnabled = false;
-                System.Threading.Thread.Sleep(600000);
+                System.Threading.Thread.Sleep(300000);
                 ohseriouslyEnabled = true;
             }
         };
